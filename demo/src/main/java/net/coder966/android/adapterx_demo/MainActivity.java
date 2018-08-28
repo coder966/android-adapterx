@@ -16,11 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // dummy data
+        // initial data
         List<Person> firstList = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
             firstList.add(new Person("Person #"+i));
         }
+
+        // more data
         List<Person> secondList = new ArrayList<>();
         for (int i = 21; i <= 40; i++) {
             secondList.add(new Person("Person #"+i));
@@ -33,11 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
         // prepare the adapter
         MyAdapter adapter = new MyAdapter(firstList);
+
+        // set loading layout
         adapter.setLoadingView(R.layout.loading);
+
+        // set the callback
         adapter.setOnLoadMoreListener(lastItem -> {
+
+            // delay for 3 seconds just to demonstrate network delay
             new Handler().postDelayed(() -> {
+                // when you get your data, load it
                 adapter.load(secondList);
-            }, 3000); // delay for 3 seconds just to demonstrate network delay
+            }, 3000);
+
         });
 
         // set the adapter to the recycler view
