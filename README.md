@@ -37,15 +37,14 @@ Example:
 // NOTE: this must be done before setting the adapter to the recycler view.
 
 adapter.setLoadingView(R.layout.loading);
-adapter.setOnLoadMoreListener(lastItem -> {
+adapter.setOnLoadMoreListener((adapterx, lastItem) -> {
 	/*
 	Perform DB/API call to get more items.
 	IF YOU NEED, you can use the provided reference "lastItem" to determine which items to load.
 	*/
 
 	// when you get your new list of items, call load method
-	// if you pass null or empty list, AdapterX will figure out that the dataset has been completely loaded and will disable the loading feature automatically.
-	adapter.load(moreDataList);
+	adapterx.load(moreDataList);
 });
 ```
 The above segment of code uses Java's Lambda Expressions. If you are not familiar with JDK8 new features, you can always use the old style.

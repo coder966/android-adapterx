@@ -17,7 +17,7 @@ import java.util.List;
  */
 public abstract class AdapterX<T> extends RecyclerView.Adapter{
     public interface OnLoadMoreListener<T>{
-        void onLoadMore(T lastItem);
+        void onLoadMore(AdapterX<T> adapter, T lastItem);
     }
 
     private static class LoadingVH extends RecyclerView.ViewHolder{
@@ -106,7 +106,7 @@ public abstract class AdapterX<T> extends RecyclerView.Adapter{
                 // (dy > 0) means scroll down
                 if(dy > 0 && !finished && !isLoading && (man.findLastVisibleItemPosition() + prefetchThreshold) >= man.getItemCount()){
                     isLoading = true;
-                    loadingListener.onLoadMore(list.get(list.size()-1));
+                    loadingListener.onLoadMore(AdapterX.this, list.get(list.size()-1));
                     list.add(null);
                     loadingItemIndex = list.size()-1;
                     rv.post(() -> notifyItemInserted(loadingItemIndex));

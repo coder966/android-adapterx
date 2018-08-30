@@ -40,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
         adapter.setLoadingView(R.layout.loading);
 
         // set the callback
-        adapter.setOnLoadMoreListener(lastItem -> {
+        adapter.setOnLoadMoreListener((adapterx, lastItem) -> {
 
             // delay for 3 seconds just to demonstrate network delay
             new Handler().postDelayed(() -> {
                 // when you get your data, load it
-                adapter.load(secondList);
+                adapterx.load(secondList);
             }, 3000);
 
         });
