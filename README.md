@@ -6,7 +6,7 @@ Installation
 ---
 Please use whatever last version is.
 ```gradle
-implementation 'net.coder966.android:adapterx:0.1.0'
+implementation 'net.coder966.android:adapterx:0.3.0'
 ```
 
 Usage
