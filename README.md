@@ -11,32 +11,15 @@ implementation 'net.coder966.android:adapterx:0.1.0'
 
 Usage
 ---
-For full working example, see the demo module.
+For a full working example, see the demo module.
 
-Normally, if you use the regular Adapter<VH> you will have something similar to this:
-```java
-// prepare the recycler view
-RecyclerView recyclerView = findViewById(R.id.recycler_view);
-recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-// prepare the adapter
-MyAdapter adapter = new MyAdapter(myList);
-
-// set the adapter to the recycler view
-recyclerView.setAdapter(adapter);
-```
-
-To use AdapterX, you must set two things:
-
-* The loading view: the view that will be shown at the very end of the list when the RecyclerView is in loading state.
-* The OnLoadMoreListener: the callback that is invoked every time when the user scrolls down and approaches the end of the list.
-
-Example:
+* Extend `AdapterX<T>`. `T` is the type of individual items in your list.
+* To enable "Load More" feature, you must set the `OnLoadMoreListener`.
 
 ```java
 // NOTE: this must be done before setting the adapter to the recycler view.
 
-adapter.setLoadingView(R.layout.loading);
+// optional but mandatory if you want to enable "Load More" feature.
 adapter.setOnLoadMoreListener((adapterx, lastItem) -> {
 	/*
 	Perform DB/API call to get more items.
@@ -46,15 +29,22 @@ adapter.setOnLoadMoreListener((adapterx, lastItem) -> {
 	// when you get your new list of items, call load method
 	adapterx.load(moreDataList);
 });
+
+// The above segment of code uses Java's Lambda Expressions. If you are not familiar with JDK8 new features, you can always use the old style.
 ```
-The above segment of code uses Java's Lambda Expressions. If you are not familiar with JDK8 new features, you can always use the old style.
 
 More optional settings
 ---
-AdapterX can pre-fetch data to improve user experience. The default pre-fetch distance is 5 items. You can change that by:
+* AdapterX can pre-fetch data to improve user experience. The default pre-fetch distance is 5 items.
 
 ```java
 adapter.setPrefetchThreshold(10);
+```
+
+* To set a custom loading view
+
+```java
+adapter.setLoadingView(R.layout.loading);
 ```
 
 License

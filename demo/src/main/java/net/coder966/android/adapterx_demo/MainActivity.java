@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
         // prepare the adapter
         MyAdapter adapter = new MyAdapter(firstList);
 
-        // set loading layout
-        adapter.setLoadingView(R.layout.loading);
-
         // set the callback
         adapter.setOnLoadMoreListener((adapterx, lastItem) -> {
 

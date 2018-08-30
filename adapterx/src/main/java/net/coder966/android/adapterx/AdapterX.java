@@ -89,11 +89,16 @@ public abstract class AdapterX<T> extends RecyclerView.Adapter{
         super.onAttachedToRecyclerView(rv);
 
         // check the requirements for the "load more" feature to work
-        if(loadingListener == null || loadingLayout == 0 || !(rv.getLayoutManager() instanceof LinearLayoutManager)){
+        if(loadingListener == null || !(rv.getLayoutManager() instanceof LinearLayoutManager)){
             return;
         }
 
+        // setup loading view
+        if(loadingLayout == 0){
+            loadingLayout = R.layout.default_loading;
+        }
         loadingView = LayoutInflater.from(rv.getContext()).inflate(loadingLayout, rv, false);
+
         final LinearLayoutManager man = (LinearLayoutManager) rv.getLayoutManager();
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
