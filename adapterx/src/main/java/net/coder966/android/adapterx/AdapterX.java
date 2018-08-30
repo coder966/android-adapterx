@@ -16,10 +16,6 @@ import java.util.List;
  * @param <T> The type of individual items in your list
  */
 public abstract class AdapterX<T> extends RecyclerView.Adapter{
-    public interface OnLoadMoreListener<T>{
-        void onLoadMore(AdapterX<T> adapter, T lastItem);
-    }
-
     private static class LoadingVH extends RecyclerView.ViewHolder{
         LoadingVH(View itemView){
             super(itemView);
