@@ -1,6 +1,7 @@
 package net.coder966.android.adapterx_demo;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,7 @@ public class MyAdapter extends AdapterX<Person> {
      * @return
      */
     @Override
-    public int getItemViewType(Person item) {
+    public int getItemViewType(@Nullable Person item) {
         if(item.gender == Gender.MALE){
             return VIEW_TYPE_MALE;
         }else{
@@ -82,6 +83,7 @@ public class MyAdapter extends AdapterX<Person> {
      * @param viewType
      * @return
      */
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
         if(viewType == VIEW_TYPE_MALE){
@@ -107,7 +109,7 @@ public class MyAdapter extends AdapterX<Person> {
      * @param item
      */
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @NonNull Person item) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @Nullable Person item) {
         if(holder instanceof MaleViewHolder){
             ((MaleViewHolder) holder).nameTextView.setText(item.name);
         }else{
