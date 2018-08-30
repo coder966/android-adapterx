@@ -17,15 +17,29 @@ import java.util.List;
  * Person: is the individual item type
  * MyAdapter.MyViewHolder: is the view holder type
  */
-public class MyAdapter extends AdapterX<Person, MyAdapter.MyViewHolder> {
+public class MyAdapter extends AdapterX<Person> {
+    private final int VIEW_TYPE_MALE = 1;
+    private final int VIEW_TYPE_FEMALE = 2;
 
     /**
      * Define your normal ViewHolder. No changes on this.
      */
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MaleViewHolder extends RecyclerView.ViewHolder{
         TextView nameTextView;
 
-        public MyViewHolder(View itemView){
+        public MaleViewHolder(View itemView){
+            super(itemView);
+            nameTextView = itemView.findViewById(R.id.name);
+        }
+    }
+
+    /**
+     * Define your normal ViewHolder. No changes on this.
+     */
+    public static class FemaleViewHolder extends RecyclerView.ViewHolder{
+        TextView nameTextView;
+
+        public FemaleViewHolder(View itemView){
             super(itemView);
             nameTextView = itemView.findViewById(R.id.name);
         }
@@ -37,6 +51,20 @@ public class MyAdapter extends AdapterX<Person, MyAdapter.MyViewHolder> {
      */
     public MyAdapter(List<Person> initialList){
         super(initialList);
+    }
+
+    /**
+     * Just to test multiple view types
+     * @param item
+     * @return
+     */
+    @Override
+    public int getItemViewType(Person item) {
+        if(item.gender == Gender.MALE){
+            return VIEW_TYPE_MALE;
+        }else{
+            return VIEW_TYPE_FEMALE;
+        }
     }
 
     /**
@@ -55,9 +83,14 @@ public class MyAdapter extends AdapterX<Person, MyAdapter.MyViewHolder> {
      * @return
      */
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.item, parent, false);
-        return new MyViewHolder(itemView);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
+        if(viewType == VIEW_TYPE_MALE){
+            View itemView = inflater.inflate(R.layout.item_male, parent, false);
+            return new MaleViewHolder(itemView);
+        }else{
+            View itemView = inflater.inflate(R.layout.item_female, parent, false);
+            return new FemaleViewHolder(itemView);
+        }
     }
 
     /**
@@ -65,7 +98,7 @@ public class MyAdapter extends AdapterX<Person, MyAdapter.MyViewHolder> {
      * onBindViewHolder(RecyclerView.ViewHolder holder, int position)
      *
      * But here you should implement THIS method:
-     * onBindViewHolder(MyViewHolder holder, Person item)
+     * onBindViewHolder(ViewHolder holder, Person item)
      *
      * Notice the second argument was an integer representing the item position in the list
      * here it is an object fetched from the list for you, this is nice add.
@@ -74,7 +107,11 @@ public class MyAdapter extends AdapterX<Person, MyAdapter.MyViewHolder> {
      * @param item
      */
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, @NonNull Person item) {
-        holder.nameTextView.setText(item.name);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @NonNull Person item) {
+        if(holder instanceof MaleViewHolder){
+            ((MaleViewHolder) holder).nameTextView.setText(item.name);
+        }else{
+            ((FemaleViewHolder) holder).nameTextView.setText(item.name);
+        }
     }
 }

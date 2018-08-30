@@ -13,9 +13,8 @@ import java.util.List;
 /**
  * The is a RecyclerView adapter. It introduces "Load More" feature.
  * @param <T> The type of individual items in your list
- * @param <VH> The ViewHolder class
  */
-public abstract class AdapterX<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter{
+public abstract class AdapterX<T> extends RecyclerView.Adapter{
     public interface OnLoadMoreListener<T>{
         void onLoadMore(T lastItem);
     }
@@ -37,9 +36,9 @@ public abstract class AdapterX<T, VH extends RecyclerView.ViewHolder> extends Re
     private int loadingLayout;
     private View loadingView;
 
-    public abstract VH onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType);
+    public abstract RecyclerView.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType);
 
-    public abstract void onBindViewHolder(@NonNull VH holder, @NonNull T item);
+    public abstract void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @NonNull T item);
 
     public int getItemViewType(T item){
         return 0;
@@ -141,7 +140,7 @@ public abstract class AdapterX<T, VH extends RecyclerView.ViewHolder> extends Re
     @Override
     final public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(!(holder instanceof LoadingVH)){
-            onBindViewHolder((VH) holder, list.get(position));
+            onBindViewHolder(holder, list.get(position));
         }
     }
 

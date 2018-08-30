@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
         // initial data
         List<Person> firstList = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
-            firstList.add(new Person("Person #"+i));
+            firstList.add(new Person("Person #"+i, i%2==0 ? Gender.MALE : Gender.FEMALE));
         }
 
         // more data
         List<Person> secondList = new ArrayList<>();
         for (int i = 21; i <= 40; i++) {
-            secondList.add(new Person("Person #"+i));
+            firstList.add(new Person("Person #"+i, i%2==0 ? Gender.MALE : Gender.FEMALE));
         }
 
 
