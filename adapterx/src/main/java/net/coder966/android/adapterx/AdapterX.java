@@ -59,22 +59,19 @@ public abstract class AdapterX<T> extends RecyclerView.Adapter{
     }
 
     /**
-     * If you pass
-     * NULL: means there was an error so hide loading view.
-     * Empty list: means there is no more data.
+     * Call this method if an error has occurred during loading more items. This will only hide the loading view.
+     */
+    public void error(){
+        removeLoadingView();
+    }
+
+    /**
+     * If you pass NULL or an empty list, then that means there is no more data.
      * @param newItems The list of new items to be added to the RecyclerView
      */
     public void load(List<T> newItems){
-        // remove loading view
-        list.remove(list.size()-1);
-        notifyItemRemoved(list.size());
-        isLoading = false;
-        loadingItemIndex = -1;
-
-        // add the new items
-        if(newItems == null){
-            // don't do anything
-        }else if(newItems.isEmpty()){
+        removeLoadingView();
+        if(newItems == null || newItems.isEmpty()){
             finished = true;
         }else{
             int oldSize = list.size();
@@ -147,4 +144,10 @@ public abstract class AdapterX<T> extends RecyclerView.Adapter{
         }
     }
 
+    private void removeLoadingView(){
+        list.remove(list.size()-1);
+        notifyItemRemoved(list.size());
+        isLoading = false;
+        loadingItemIndex = -1;
+    }
 }
