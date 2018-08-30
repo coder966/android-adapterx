@@ -62,7 +62,9 @@ public abstract class AdapterX<T, VH extends RecyclerView.ViewHolder> extends Re
     }
 
     /**
-     * To tell that your data has been completely loaded to the adapter (meaning there is no more data), call this with NULL argument or empty list.
+     * If you pass
+     * NULL: means there was an error so hide loading view.
+     * Empty list: means there is no more data.
      * @param newItems The list of new items to be added to the RecyclerView
      */
     public void load(List<T> newItems){
@@ -73,7 +75,9 @@ public abstract class AdapterX<T, VH extends RecyclerView.ViewHolder> extends Re
         loadingItemIndex = -1;
 
         // add the new items
-        if(newItems == null || newItems.isEmpty()){
+        if(newItems == null){
+            // don't do anything
+        }else if(newItems.isEmpty()){
             finished = true;
         }else{
             int oldSize = list.size();
