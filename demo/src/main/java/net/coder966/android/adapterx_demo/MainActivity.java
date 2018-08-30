@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         // prepare the adapter
         MyAdapter adapter = new MyAdapter(firstList);
 
-        // set the callback
+        // set the listener
         adapter.setOnLoadMoreListener((adapterx, lastItem) -> {
 
             // delay for 3 seconds just to demonstrate network delay
