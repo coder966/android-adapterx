@@ -59,6 +59,14 @@ public abstract class AdapterX<T> extends RecyclerView.Adapter{
     }
 
     /**
+     * Set a whole new list of items.
+     * @param newList
+     */
+    public void setNewList(List<T> newList){
+        list = newList;
+        notifyDataSetChanged();
+    }
+    /**
      * Call this method if an error has occurred during loading more items. This will only hide the loading view.
      */
     public void error(){
