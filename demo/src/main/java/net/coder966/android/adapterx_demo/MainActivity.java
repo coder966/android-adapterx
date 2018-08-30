@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         // more data
         List<Person> secondList = new ArrayList<>();
         for (int i = 21; i <= 40; i++) {
-            firstList.add(new Person("Person #"+i, i%2==0 ? Gender.MALE : Gender.FEMALE));
+            secondList.add(new Person("Person #"+i, i%2==0 ? Gender.MALE : Gender.FEMALE));
         }
 
 
