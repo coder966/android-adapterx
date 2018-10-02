@@ -1,6 +1,9 @@
 Changelog
 ===
 
+##### v0.3.1 (02-10-2018):
+* Migrate to androidx artifact.
+
 ##### v0.3.0 (31-08-2018):
 * The adapter now has a default loading view.
 * Add `AdapterX#setNewList`.
