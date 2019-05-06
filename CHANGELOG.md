@@ -1,6 +1,9 @@
 Changelog
 ===
 
+##### v0.3.2 (06-05-2019):
+* Update dependencies.
+
 ##### v0.3.1 (02-10-2018):
 * Migrate to androidx artifact.
 
